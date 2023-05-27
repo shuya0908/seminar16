@@ -1,1 +1,1 @@
-# seminor16
+# seminar16
