@@ -68,6 +68,37 @@
     \end{lem}
 \end{screen}
 
+\begin{proof}
+    $\forall n\ge2$ に対し
+    $$
+    \int_0^{t} ds_1\int_0^{s_1} ds_2\dotsb\int_0^{s_{n-1}} ds_n
+    = \frac{t^n}{n!}
+    $$
+    が成り立つことを用いる．
+    $\forall t\in[0, T]$ に対し
+    \begin{align}
+        g(t)
+        &\le a+b\int_0^t ds_1g(s_1) \\
+        &\le a+b\int_0^t ds_1(a+b\int_0^{s_1} ds_2g(s_2)) \\
+        &= a
+        + ab\UB{\int_0^t ds_1}{=t}
+        + b^2\int_0^t ds_1\int_0^{s_1} ds_2g(s_2) \\
+        &\le a
+        + abt
+        + b^2\int_0^t ds_1\int_0^{s_1} ds_2(a+b\int_0^{s_2} ds_3g(s_3)) \\
+        &= a
+        + abt
+        + ab^2\UB{\int_0^t ds_1\int_0^{s_1} ds_2}{=t^2/2}
+        + b^3\int_0^t ds_1\int_0^{s_1} ds_2\int_0^{s_2} ds_3g(s_3) \\
+        &\le \dotsb \\
+        &\le a+a(bt)+a\frac{(bt)^2}{2}+\dotsb+a\frac{(bt)^n}{n!}
+        + b^{n+1}\int_0^t ds_1\int_0^{s_1} ds_2\dotsb\int_0^{s_n} ds_{n+1}\UB{g(s_{n+1})}{\le\exists A\ge0\text{（$g$: bdd. on $[0, T]$ より）}} \\
+        &\le a\UB{\sum_{k=0}^{n}\frac{(bt)^k}{k!}}{\to e^{bt}\text{ as }n\to\infty}
+        + A\UB{\frac{(bt)^{n+1}}{(n+1)!}}{\to0\text{ as }n\to\infty}
+        \xrightarrow{n\to\infty}ae^{bt}.
+    \end{align}
+\end{proof}
+
 \setcounter{thm}{2}
 
 \begin{screen}
