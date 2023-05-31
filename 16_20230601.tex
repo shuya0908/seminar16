@@ -32,19 +32,16 @@
 
 \subsection{The Lipschitz Case}
 
-この節では，係数 $\sigma, b$ に対して以下の Lipschitz 連続性を仮定する．
-
+この節では，係数 $\sigma, b$ に対して以下の条件を仮定する：
 \begin{screen}
-    \begin{df*}[変数 $x$ に対する Lipschitz 連続性]
-        $\sigma, b$: 変数 $x$ に対して $\mathbf{R_+}\times\mathbf{R}^d$ 上 Lipschitz 連続 \\
-        $\stackrel{\operatorname{def}}{\iff}\exists K\ge0$ s.t. $\forall t\ge0, \forall x, \forall y\in\mathbf{R}^d,$
-        \begin{align}
-            \left\lvert\sigma(t, x)-\sigma(t, y)\right\rvert
-            &\le K\left\lvert x-y\right\rvert, \\
-            \left\lvert b(t, x)-b(t, y)\right\rvert
-            &\le K\left\lvert x-y\right\rvert.
-        \end{align}
-    \end{df*}
+    \textbf{\underline{仮定} }
+    $\sigma, b$: $\mathbf{R_+}\times\mathbf{R}^d$ 上連続かつ変数 $x$ に関して Lipschitz 連続，つまり $\exists K\ge0$ s.t. $\forall t\ge0, \forall x, \forall y\in\mathbf{R}^d,$
+    \begin{align}
+        \left\lvert\sigma(t, x)-\sigma(t, y)\right\rvert
+        &\le K\left\lvert x-y\right\rvert, \\
+        \left\lvert b(t, x)-b(t, y)\right\rvert
+        &\le K\left\lvert x-y\right\rvert.
+    \end{align}
 \end{screen}
 
 \bigskip
