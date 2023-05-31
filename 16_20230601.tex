@@ -30,4 +30,21 @@
 
 この結果は Lipschitz 連続性が成り立っているとき，直接従う．
 
+\subsection{The Lipschitz Case}
+
+この節では，以下を仮定する．
+
+\begin{screen}
+    \begin{df*}[変数 $x$ に対する Lipschitz 連続性]
+    $\sigma, b$: 変数 $x$ に対して $\mathbf{R_+}\times\mathbf{R}^d$ 上 Lipschitz 連続 \\
+        $\stackrel{\operatorname{def}}{\iff}\exists K\ge0$ s.t. $\forall t\ge0, \forall x, \forall y\in\mathbf{R}^d,$
+        \begin{align}
+            \left\lvert\sigma(t, x)-\sigma(t, y)\right\rvert
+            &\le K\left\lvert x-y\right\rvert, \\
+            \left\lvert b(t, x)-b(t, y)\right\rvert
+            &\le K\left\lvert x-y\right\rvert.
+        \end{align}
+    \end{df*}
+\end{screen}
+
 \end{document}
