@@ -146,4 +146,175 @@ $E(\sigma, b)$ に関して
     を課す必要がある．
 \end{remark*}
 
+\begin{proof}
+    議論を単純にするため，$d=m=1$ の場合を考える．
+    \begin{enumerate}[label=(\roman*)]
+        \item
+        （同一の filtered prob sp. 上，同一の BM に対して定義された）$X_0=X'_0$ を満たす 2 つの解 $X, X'$ を考える．
+        
+        $M>0$: 固定
+        $$
+        \tau_M:=\inf\{t\ge0:\left\lvert X_t\right\rvert\vee\left\lvert X'_t\right\rvert\ge M\}
+        $$
+        と定めると $\forall t\ge0$ に対し
+        \begin{align}
+            X_{t\wedge\tau_M}
+            &= X_0
+            + \int_0^{t\wedge\tau_M}\sigma(s, X_s)dB_s
+            + \int_0^{t\wedge\tau_M}b(s, X_s)ds, \\
+            X'_{t\wedge\tau_M}
+            &= X'_0
+            + \int_0^{t\wedge\tau_M}\sigma(s, X'_s)dB_s
+            + \int_0^{t\wedge\tau_M}b(s, X'_s)ds.
+        \end{align}
+
+        $T>0$: 固定
+
+        $\forall t\in[0, T]$ に対し
+        \begin{align}
+            E[(X_{t\wedge\tau_M}-X'_{t\wedge\tau_M})^2]
+            &= E[(\int_0^{t\wedge\tau_M}(\sigma(s, X_s)-\sigma(s, X'_s))dB_s
+            + \int_0^{t\wedge\tau_M}(b(s, X_s)-b(s, X'_s))ds)^2] \\
+            &\le 
+            \begin{multlined}[t]
+                2(E[(\int_0^{t\wedge\tau_M}(\sigma(s, X_s)-\sigma(s, X'_s))dB_s)^2] \\
+                + E[(\int_0^{t\wedge\tau_M}(b(s, X_s)-b(s, X'_s))ds)^2])\quad
+                (\because (a+b)^2\le 2(a^2+b^2))
+            \end{multlined} \\
+            &\stackrel{\text{(5.14), Schwarz}}{\le}
+            \begin{multlined}[t]
+                2(E[\int_0^{t\wedge\tau_M}(\sigma(s, X_s)-\sigma(s, X'_s))^2 ds] \\
+                + TE[\int_0^{t\wedge\tau_M}(b(s, X_s)-b(s, X'_s))^2 ds])
+            \end{multlined} \\
+            &\stackrel{\text{Lipschitz}}{\le}
+            2(K^2 E[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds]
+            + K^2 TE[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds]) \\
+            &= 2K^2(1+T)E[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds] \\
+            &\le \UB{2K^2(1+T)}{=:C}E[\int_0^t(X_{s\wedge\tau_M}-X'_{s\wedge\tau_M})^2 ds]\nazo \\
+            &\beq{\text{Fubini}} C\int_0^t E[(X_{s\wedge\tau_M}-X'_{s\wedge\tau_M})^2] ds.
+        \end{align}
+
+        よって関数 $[0, T]\ni t\mapsto E[(X_{t\wedge\tau_M}-X'_{t\wedge\tau_M})^2]\in[0, \infty)$ を $h$ と定めると，$\forall t\in[0, T]$ に対し
+        $$
+        h(t)
+        \le C\int_0^t h(s)ds.
+        $$
+        
+        ここで $\tau_M$ の定め方から $\left\lvert X_{t\wedge\tau_M}\right\rvert\vee\left\lvert X'_{t\wedge\tau_M}\right\rvert\le M,$ ゆえに $(X_{t\wedge\tau_M})^2, (X'_{t\wedge\tau_M})^2\le M^2$ が言えるので
+                \begin{align}
+                    h(t)
+                    &= E[(X_{t\wedge\tau_M}-X'_{t\wedge\tau_M})^2] \\
+                    &\le 2(E[(X_{t\wedge\tau_M})^2]+E[(X'_{t\wedge\tau_M})^2]) \le 4M^2.
+                \end{align}
+        したがって $h$ は有界なので Lemma \ref{lem:804} が適用でき，$h(t)\le0\cdot e^{Ct}=0$ より $h\equiv0.$
+        ゆえに $X, X'$ の連続性と合わせて $P(\forall t\in[0, T], X_{t\wedge\tau_M}=X'_{t\wedge\tau_M})=1$ が成り立つ．
+        また a.s. で $\lim_{M\to\infty}\tau_M=\infty$ となるので $P(\forall t\in[0, T], X_t=X'_t)=1.$
+        よって pathwise uniqueness が成り立つことが言えた．
+        
+        \item
+        Picard の逐次近似法を用いて解を構成する．
+        求めたい解の逐次近似列を，帰納的に
+        \begin{align}
+            X_t^{(0)}
+            &:= x, \\
+            X_t^{(1)}
+            &:= x
+            + \int_0^t \sigma(s, x)dB_s
+            + \int_0^t b(s, x)ds, \\
+            &\ \ \vdots \\
+            X_t^{(n)}
+            &:= x
+            + \int_0^t \sigma(s, X_s^{(n-1)})dB_s
+            + \int_0^t b(s, X_s^{(n-1)})ds
+        \end{align}
+        と定める（$\forall n\ge1$ に対し $X^{(n)}$ が連続かつ $(\mathcal{F}_t)$-adapted であることが帰納的にわかるため，右辺の確率積分は well-defined に定まる）．
+
+        $T>0$: 固定
+
+        $\forall n\ge1, \forall t\in[0, T]$ に対し
+        $$
+        g_n(t)
+        := E[\sup_{s\in[0, t]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert^2]
+        $$
+        と定める（この関数列 $\{g_n\}_{n\ge1}$ が有界であることを帰納的に確かめる）．
+        $\sigma(\cdot, x), b(\cdot, x)$: $[0, T]$ 上連続 $\implies [0, T]$ 上有界，つまり
+        $$
+        \exists K_T\ge0\text{ s.t. }\sup_{[0, T]}\left\lvert \sigma(\cdot, x)\right\rvert\vee\sup_{[0, T]}\left\lvert b(\cdot, x)\right\rvert\le K_T
+        $$
+        なので $\forall t\in[0, T]$ に対し
+        \begin{align}
+            g_1(t)
+            &= E[\sup_{s\in[0, t]}\left\lvert X_s^{(1)}-X_s^{(0)}\right\rvert^2] \\
+            &= E[\sup_{s\in[0, t]}\left\lvert \int_0^s \sigma(u, x)dB_u
+            + \int_0^s b(u, x)du\right\rvert^2] \\
+            &\le 2(E[\sup_{s\in[0, t]}(\int_0^s \sigma(u, x)dB_u)^2]
+            + E[\sup_{s\in[0, t]}(\int_0^s b(u, x)du)^2]) \\
+            &\stackrel{\text{Doob}}{\le} 2(4E[(\int_0^t \sigma(u, x)dB_u)^2]
+            + \sup_{s\in[0, t]}sE[\int_0^s (b(u, x)^2)du]) \\
+            &\le 2(4E[\int_0^T (\sigma(u, x))^2du]
+            + TE[\int_0^T (b(u, x))^2du]) \\
+            &\le 2K_T^2T(4+T)=:C'_T.
+        \end{align}
+
+        ここで
+        \begin{align}
+            \left\lvert X_t^{(n)}-X_t^{(n-1)}\right\rvert^2
+            &= \left\lvert \int_0^t (\sigma(s, X_s^{(n)})-\sigma(s, X_s^{(n-1)}))dB_s
+            + \int_0^t (b(s, X_s^{(n)})-b(s, X_s^{(n-1)}))ds\right\rvert^2 \\
+            &\le 2((\int_0^t (\sigma(s, X_s^{(n)})-\sigma(s, X_s^{(n-1)}))dB_s)^2
+            + (\int_0^t (b(s, X_s^{(n)})-b(s, X_s^{(n-1)}))ds)^2)
+        \end{align}
+        が成り立つことより，
+        \begin{align}
+            g_{n+1}(t)
+            &= E[\sup_{s\in[0, t]}\left\lvert X_s^{(n+1)}-X_s^{(n)}\right\rvert^2] \\
+            &\le 
+            \begin{multlined}[t]
+                2(E[\sup_{s\in[0, t]}(\int_0^s (\sigma(u, X_u^{(n+1)})-\sigma(u, X_u^{(n)}))dB_u)^2] \\
+                + E[\sup_{s\in[0, t]}(\int_0^s (b(u, X_u^{(n+1)})-b(u, X_u^{(n)}))du)^2])
+            \end{multlined} \\
+            &\stackrel{\text{BDG}}{\le}
+            \begin{multlined}[t]
+                2(C_{(2)}E[\int_0^t (\sigma(u, X_u^{(n+1)})-\sigma(u, X_u^{(n)}))^2 du] \\
+                + TE[\int_0^t (b(u, X_u^{(n+1)})-b(u, X_u^{(n)}))^2 du])
+            \end{multlined} \\
+            &\le \UB{2(C_{(2)}+T)K^2}{=:C_T}E[\int_0^t\left\lvert X_u^{(n)}-X_u^{(n-1)}\right\rvert^2 du] \\
+            &\le C_TE[\int_0^t\sup_{r\in[0, u]}\left\lvert X_r^{(n)}-X_r^{(n-1)}\right\rvert^2 du] \\
+            &\beq{\text{Fubini}}
+            C_T\int_0^t E[\sup_{r\in[0, u]}\left\lvert X_r^{(n)}-X_r^{(n-1)}\right\rvert^2]du \\
+            &= C_T\int_0^t g_n(u)du.
+        \end{align}
+
+        したがって $\forall n\ge1, \forall t\in[0, T]$ に対し
+        \begin{align}
+            g_n(t)
+            &\le C_T\int_0^t dug_{n-1}(u) \\
+            &\le C_T^2\int_0^t du_1\int_0^{u_1} du_2g_{n-2}(u_2) \\
+            &\le \dotsb \\
+            &\le C_T^{n-1}\int_0^t du_1\int_0^{u_1} du_2\dotsb\int_0^{u_{n-2}} du_{n-1}\UB{g_{1}(u_{n-1})}{\le C'_T} \\
+            &\le C'_T\frac{(C_Tt)^{n-1}}{(n-1)!}.
+        \end{align}
+        
+        $t=T$ ととり Chebyshevの不等式を用いると
+        \begin{align}
+            P(\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert>g_n(T)^{1/4})
+            \le g_n(T)\cdot g_n(T)^{-1/2}
+            = g_n(T)^{1/2}.
+        \end{align}
+
+        ここで $\sum_{n=1}^{\infty}g_n(T)^{1/2}<\infty$ から，Borel-Cantelliの補題より
+        \begin{align}
+            P(\exists n_0\ge1\text{ s.t. }\forall n\ge n_0, 
+            \sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert\le g_n(T)^{1/4}) = 1.
+        \end{align}
+
+        さらに $\sum_{n=1}^{\infty}g_n(T)^{1/4}<\infty$ なので
+        \begin{align}
+            P(\lim_{n\to\infty}\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert=0)=1
+        \end{align}
+        が成り立つ．
+        よって逐次近似列 $(X_t^{(n)})_{t\in[0, T]}$ は a.s. に $[0, T]$ 上一様収束するので，その極限過程を $(X_t)_{t\in[0, T]}$ と定める（$(X_t)_{t\in[0, T]}$ は連続な sample paths をもち， $B$ の canonical filtration に適合しているという性質を引き継ぐ）．
+    \end{enumerate}
+\end{proof}
+
 \end{document}
