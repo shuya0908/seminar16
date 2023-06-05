@@ -401,8 +401,76 @@ $E(\sigma, b)$ に関して
             \end{align}
         \end{screen}
         
-        よって逐次近似列 $(X_t^{(n)})_{t\in[0, T]}$ は a.s. に $[0, T]$ 上一様収束するので，その極限過程を $(X_t)_{t\in[0, T]}$ と定める（$(X_t)_{t\in[0, T]}$ は連続な sample paths をもち， $B$ の canonical filtration に適合しているという性質を引き継ぐ）．
+        よって逐次近似列 $(X_t^{(n)})_{t\in[0, T]}$ は a.s. に $[0, T]$ 上一様収束するので，その一様収束極限を $(X_t)_{t\in[0, T]}$ と定める
+        （$(X_t)_{t\in[0, T]}$ は連続な sample paths をもち， $B$ の canonical filtration に適合しているという性質を引き継ぐ）．
+
+        最後に $\forall t\in[0, T]$ に対し
+        \begin{align}
+            \lim_{n\to\infty}(\int_0^t \sigma(s, X_s)dB_s-\int_0^t \sigma(s, X_s^{(n)})dB_s)
+            &= 0, \\
+            \lim_{n\to\infty}(\int_0^t b(s, X_s)ds-\int_0^t b(s, X_s^{(n)})ds)
+            &= 0
+        \end{align}
+        が in pr. で成り立つことを示す．
+
+        \begin{description}
+            \item[第 1 式が成り立つこと：] 
+            a.s. に
+            \begin{enumerate}[label=(\roman*)]
+                \item
+                $\forall s\in[0, T]$ に対し $\sigma(s, X_s^{(n)})\to\sigma(s, X_s)$
+                \item
+                $\forall n\ge1, \forall s\in[0, T]$ に対し $\exists K_s\ge0$ s.t. $\left\lvert \sigma(s, X_s^{(n)})\right\rvert\le K_s$
+                \item
+                $\int_0^t (K_s)^2 ds<\infty$
+            \end{enumerate}
+            が言える．
+
+            \begin{screen}
+            $\because)$
+                \begin{enumerate}[label=(\roman*)]
+                    \item
+                    Lipschitz 条件より従う．
+                    \item
+                    \begin{align}
+                        \left\lvert \sigma(s, X_s^{(n)})\right\rvert
+                        &\le \left\lvert \sigma(s, X_s^{(n)})-\sigma(s, X_s)\right\rvert
+                        + \left\lvert \sigma(s, X_s)\right\rvert \\
+                        &\stackrel{\text{Lipschitz}}{\le}
+                        K\left\lvert X_s^{(n)}-X_s\right\rvert
+                        + \left\lvert \sigma(s, X_s)\right\rvert \\
+                        &\le K\sum_{k=1}^{\infty}\left\lvert X_s^{(k)}-X_s^{(k-1)}\right\rvert
+                        + \left\lvert \sigma(s, X_s)\right\rvert \\
+                        &\le K\UB{\sum_{k=1}^{\infty}\sup_{r\in[0, T]}\left\lvert X_r^{(k)}-X_r^{(k-1)}\right\rvert}{<\infty, s\text{ に依らない定数}}
+                        + \left\lvert \sigma(s, X_s)\right\rvert
+                        =: K_s.
+                    \end{align}
+                    \item
+                    上で定めた $K_s$ が locally bounded であることから従う．
+                \end{enumerate}
+            \end{screen}
+
+            よって Proposition 5.8 より
+            \begin{align}
+                \lim_{n\to\infty}\int_0^t \sigma(s, X_s^{(n)})dB_s
+                = \int_0^t \sigma(s, X_s)dB_s\quad
+                \text{in pr.}
+            \end{align}
+            
+            \item[第 2 式が成り立つこと：] 
+            Lipschitz 条件と優収束定理より a.s. に成り立つことが言える．
+        \end{description}
     \end{enumerate}
+
+    以上より，a.s. 収束する部分列をとることができ，a.s. に $\forall t\in[0, T]$ に対し
+    \begin{align}
+        X_t
+        = x
+        + \int_0^t \sigma(s, X_s)dB_s
+        + \int_0^t b(s, X_s)ds
+    \end{align}
+    が成り立つ．
+    $T>0$ の任意性と (i) で示した一意性より，$X$ は $E_x(\sigma, b)$ の一意な strong solution.
 \end{proof}
 
 \end{document}
