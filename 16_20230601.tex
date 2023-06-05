@@ -368,18 +368,27 @@ $E(\sigma, b)$ に関して
 
         ここで
         \begin{align}
-            \sum_{n=1}^{\infty}g_n(T)<\infty.
+            \sum_{n=1}^{\infty}(g_n(T))^{1/2}<\infty.
         \end{align}
 
         \begin{screen}
-            $\because) A_n:=C'_T(C_T T)^{n-1}/(n-1)!$ と定めると
+            $\because) A_n:=(C'_T(C_T T)^{n-1}/(n-1)!)^{1/2}$ と定めると
             \begin{align}
                 \frac{A_{n+1}}{A_n}
-                = \frac{C'_T(C_T T)^{n}}{n!}\cdot \frac{(n-1)!}{C'_T(C_T T)^{n-1}}
-                = \frac{C_T T}{n}
+                = \left(\frac{C'_T(C_T T)^{n}}{n!}\right)^{1/2}\cdot \left(\frac{(n-1)!}{C'_T(C_T T)^{n-1}}\right)^{1/2}
+                = \left(\frac{C_T T}{n}\right)^{1/2}
             \end{align}
-            より $\limsup_{n\to\infty}A_{n+1}/A_n=0<1$ なので ratio test より $\sum_{n=1}^{\infty}A_n<\infty.$
+            より $\limsup_{n\to\infty}A_{n+1}/A_n=0<1$ なので ratio test から $\sum_{n=1}^{\infty}g_n(T)\le\sum_{n=1}^{\infty}A_n<\infty.$
         \end{screen}
+
+        これより
+        \begin{align}
+            E[\sum_{n=1}^{\infty}\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert]
+            &\beq{\text{Fubini}} \sum_{n=1}^{\infty}E[\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert] \\
+            &\stackrel{\text{Schwarz}}{\le} \sum_{n=1}^{\infty}(g_n(T))^{1/2} < \infty
+        \end{align}
+        がわかるので，a.s. に $\sum_{n=1}^{\infty}\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert<\infty.$
+        
         よって逐次近似列 $(X_t^{(n)})_{t\in[0, T]}$ は a.s. に $[0, T]$ 上一様収束するので，その極限過程を $(X_t)_{t\in[0, T]}$ と定める（$(X_t)_{t\in[0, T]}$ は連続な sample paths をもち， $B$ の canonical filtration に適合しているという性質を引き継ぐ）．
     \end{enumerate}
 \end{proof}
