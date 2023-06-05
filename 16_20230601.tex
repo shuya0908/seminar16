@@ -147,7 +147,22 @@ $E(\sigma, b)$ に関して
 \end{remark*}
 
 \begin{proof}
-    議論を単純にするため，$d=m=1$ の場合を考える．
+    表記を単純にするため，$d=m=1$ の場合を考える．
+    一般の場合については
+    \begin{align}
+        X_t^i
+        = X_0^i
+        + \sum_{j=1}^{m}\int_0^t \sigma_{ij}(s, X_j)dB_s^j
+        + \int_0^t b_i(s, X_ds)
+    \end{align}
+    に対して以下と同様の議論を行えば，結果が得られる．
+    ただし
+    \begin{align}
+        \left\lVert \sigma\right\rVert^2
+        = \sum_{\substack{1\le i\le d \\ 1\le j\le m}}(\sigma_{ij})^2,\quad
+        \left\lvert b\right\rvert^2
+        = \sum_{1\le i\le d}(b_i)^2.
+    \end{align}
     \begin{enumerate}[label=(\roman*)]
         \item
         （同一の filtered prob sp. 上，同一の BM に対して定義された）$X_0=X'_0$ を満たす 2 つの解 $X, X'$ を考える．
@@ -189,10 +204,28 @@ $E(\sigma, b)$ に関して
             &\stackrel{\text{Lipschitz}}{\le}
             2(K^2 E[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds]
             + K^2 TE[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds]) \\
-            &= 2K^2(1+T)E[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds] \\
-            &\le \UB{2K^2(1+T)}{=:C}E[\int_0^t(X_{s\wedge\tau_M}-X'_{s\wedge\tau_M})^2 ds]\nazo \\
+            &= \UB{2K^2(1+T)}{=:C}E[\int_0^{t\wedge\tau_M}(X_s-X'_s)^2 ds] \\
+            &\le CE[\int_0^t(X_{s\wedge\tau_M}-X'_{s\wedge\tau_M})^2 ds] \\
             &\beq{\text{Fubini}} C\int_0^t E[(X_{s\wedge\tau_M}-X'_{s\wedge\tau_M})^2] ds.
         \end{align}
+
+        ここで，下から 2 行目の不等式は
+        \begin{align}
+            \int_0^{t\wedge\tau}f_s^2 ds
+            \le \int_0^t f_{s\wedge\tau}^2ds
+        \end{align}
+        となることを用いた．
+
+        \begin{screen}
+            $\because)$
+            \begin{align}
+                \int_0^{t\wedge\tau}f_s^2 ds
+                &= \int_0^t f_s^2\bm{1}_{[0, \tau]}(s) ds \\
+                &= \int_0^t f_s^2\bm{1}_{\{s\le\tau\}} ds \\
+                &\le \int_0^t (f_s^2\bm{1}_{\{s\le\tau\}}\textcolor{red}{+f_{\tau}^2\bm{1}_{\{s>\tau\}}}) ds \\
+                &= \int_0^t f_{s\wedge\tau}^2ds.
+            \end{align}
+        \end{screen}
 
         よって関数 $[0, T]\ni t\mapsto E[(X_{t\wedge\tau_M}-X'_{t\wedge\tau_M})^2]\in[0, \infty)$ を $h$ と定めると，$\forall t\in[0, T]$ に対し
         $$
@@ -207,9 +240,27 @@ $E(\sigma, b)$ に関して
                     &\le 2(E[(X_{t\wedge\tau_M})^2]+E[(X'_{t\wedge\tau_M})^2]) \le 4M^2.
                 \end{align}
         したがって $h$ は有界なので Lemma \ref{lem:804} が適用でき，$h(t)\le0\cdot e^{Ct}=0$ より $h\equiv0.$
-        ゆえに $X, X'$ の連続性と合わせて $P(\forall t\in[0, T], X_{t\wedge\tau_M}=X'_{t\wedge\tau_M})=1$ が成り立つ．
-        また a.s. で $\lim_{M\to\infty}\tau_M=\infty$ となるので $P(\forall t\in[0, T], X_t=X'_t)=1.$
-        よって pathwise uniqueness が成り立つことが言えた．
+        % ゆえに $X, X'$ の連続性と合わせて $P(\forall t\in[0, T], X_{t\wedge\tau_M}=X'_{t\wedge\tau_M})=1$ が成り立つ．
+        ゆえに $\forall t\in[0, T]$ に対し
+        \begin{align}
+            P(X_{t\wedge\tau_M}=X'_{t\wedge\tau_M})=1.
+        \end{align}
+
+        一方，
+        \begin{align}
+            1
+            &= P(X_{t\wedge\tau_M}=X'_{t\wedge\tau_M}) \\
+            &= P((\{X_t=X'_t\}\cap\{t\le\tau_M\})\cup(\{X_{\tau_M}=X'_{\tau_M}\}\cap\{t>\tau_M\})) \\
+            &\le P(X_t=X'_t)+P(t>\tau_M)
+            \xrightarrow{M\to\infty}P(X_t=X'_t).
+        \end{align}
+        \begin{align}
+            \therefore 
+            \forall t\in[0, T],\quad
+            P(X_t=X'_t)=1.
+        \end{align}
+
+        $X, X'$ の連続性と $T>0$ の任意性から $P(\forall t\ge0, X_t=X'_t)=1$ が成り立つので，pathwise uniqueness が成り立つことが言えた．
         
         \item
         Picard の逐次近似法を用いて解を構成する．
