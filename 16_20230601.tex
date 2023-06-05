@@ -388,6 +388,18 @@ $E(\sigma, b)$ に関して
             &\stackrel{\text{Schwarz}}{\le} \sum_{n=1}^{\infty}(g_n(T))^{1/2} < \infty
         \end{align}
         がわかるので，a.s. に $\sum_{n=1}^{\infty}\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert<\infty.$
+        よって a.s. に $(X_t^{(n)})_{t\in[0, T]}$ が Cauchy 列となることが言える．
+
+        \begin{screen}
+            $\because) k\ge l\ge1$ とする．
+            a.s. に $\forall t\in[0, T]$ に対し
+            \begin{align}
+                \left\lvert X_t^{(k)}-X_t^{(l)}\right\rvert
+                &\le \sum_{n=l+1}^{k}\left\lvert X_t^{(n)}-X_t^{(n-1)}\right\rvert \\
+                &\le \sum_{n=l+1}^{k}\sup_{s\in[0, T]}\left\lvert X_s^{(n)}-X_s^{(n-1)}\right\rvert
+                \xrightarrow{k, l\to\infty}0.
+            \end{align}
+        \end{screen}
         
         よって逐次近似列 $(X_t^{(n)})_{t\in[0, T]}$ は a.s. に $[0, T]$ 上一様収束するので，その極限過程を $(X_t)_{t\in[0, T]}$ と定める（$(X_t)_{t\in[0, T]}$ は連続な sample paths をもち， $B$ の canonical filtration に適合しているという性質を引き継ぐ）．
     \end{enumerate}
